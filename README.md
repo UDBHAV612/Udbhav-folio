@@ -1,17 +1,50 @@
-# Udbhav Chabbra · Portfolio
+# Udbhav Chabbra — Portfolio
 
-A responsive Next.js App Router portfolio with TypeScript, Tailwind CSS, Motion, and Lucide icons. Dark design, accessible navigation, reduced-motion support, three project detail pages, downloadable resume, generated Open Graph image, sitemap, and robots route.
+A personal portfolio for Udbhav Chabbra, showcasing software projects, engineering decisions, experience, and a downloadable resume. Built with a dark, responsive interface and dedicated case studies so visitors can explore the work beyond a project card.
+
+![Next.js](https://img.shields.io/badge/Next.js-111111?style=flat-square&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-111111?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-111111?style=flat-square&logo=typescript&logoColor=3178C6)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-111111?style=flat-square&logo=tailwindcss&logoColor=06B6D4)
+![Motion](https://img.shields.io/badge/Motion-111111?style=flat-square)
+![Lucide](https://img.shields.io/badge/Lucide_Icons-111111?style=flat-square)
+
+## Preview
+
+**Homepage** — introduction, navigation, and resume access.
+
+![Desktop preview of the portfolio homepage](./preview-desktop.png)
+
+**Project case study** — a closer look at the problem, solution, architecture, and technical decisions.
+
+![Preview of the Intelligent Complaint Management case study](./preview-case-study.png)
+
+## What the site includes
+
+- **Responsive design:** layouts adapt from desktop to mobile, including a mobile navigation menu.
+- **Project case studies:** dedicated pages for three projects, with problem, solution, architecture, and technology details. BakeFlow AI is marked as in development.
+- **Real project imagery:** BakeFlow AI uses application screenshots; other projects retain their abstract illustrations. Gallery images open at full resolution.
+- **Considered motion:** progressive reveal animations use Motion, with reduced-motion preferences respected.
+- **Accessibility:** semantic page structure, descriptive image text, labeled controls, keyboard-friendly navigation, and reduced-motion support.
+- **Resume and contact:** a downloadable PDF resume alongside email and social links.
+- **Shareable pages:** generated Open Graph imagery, a sitemap, and a robots route.
+
+## Live demo
+
+No public deployment URL is available in this README yet. Add a verified live URL here after deployment.
 
 ## Run locally
 
-Use Node.js 20.9 or newer.
+Use Node.js **20.9 or newer**. Install from the lockfile and start the development server:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. To check a production version:
+Open [http://localhost:3000](http://localhost:3000).
+
+To run the project checks and test a production build locally:
 
 ```sh
 npm run lint
@@ -20,43 +53,26 @@ npm run build
 npm start
 ```
 
-## Update content
+`npm start` serves the production build at [http://localhost:3000](http://localhost:3000). Stop the development server first if it is using that port.
 
-All personal content lives in `lib/portfolio.ts`. Verified facts come from `Udbhav_Chabbra_Resume.pdf`; BakeFlow AI is explicitly in development. BakeFlow uses real application screenshots; other projects retain their abstract illustrations.
+## Content and project screenshots
 
-The GitHub profile is user-verified. Supply individual project repository URLs and demo URLs in this file when available. Null links are omitted from the interface. `decisions` records verified implementation choices without invented rationale. `challenges` and `lessons` are editable arrays: their sections and case-study navigation links appear only when source-backed notes are added. No retrospective claims are inferred from the technology stack. Replace `public/Udbhav_Chabbra_Resume.pdf` when the resume changes.
+Portfolio content, project status, external URLs, and screenshot captions are maintained in `lib/portfolio.ts`. Individual project repository and demo links are nullable; the site omits links that have not been supplied. Replace `public/Udbhav_Chabbra_Resume.pdf` when the resume changes.
 
-## Deploy on Vercel
+BakeFlow AI screenshots are stored in `public/images/bakeflow/`. To add real captures for another project, place them in `public/screenshots/` and add entries to that project's `screenshots` array. Each entry needs a public path, descriptive alt text, a caption, and the original pixel width and height. The first image becomes the project-card cover and the featured gallery image. An empty array keeps the existing illustration.
 
-1. Push this project to a Git repository and import that repository into Vercel.
-2. Keep the detected Next.js framework preset and default build settings.
-3. Set `NEXT_PUBLIC_SITE_URL` to your real production origin (for example your assigned Vercel URL, without a trailing slash).
-4. Deploy, then confirm `/sitemap.xml`, `/robots.txt`, project pages, and the resume download.
+## Project structure
 
-For local metadata verification, copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL`. Without it, the sitemap intentionally returns no URLs rather than inventing a domain. No backend service or secret is required.
+| Path | Purpose |
+| --- | --- |
+| `app/` | Homepage, project routes, and metadata endpoints |
+| `components/` | Reusable interface, project media, and interactions |
+| `lib/portfolio.ts` | Portfolio content and project configuration |
+| `app/globals.css` | Responsive styles and reduced-motion rules |
+| `public/` | Resume and image assets |
 
-## Architecture
+## Deployment notes
 
-- `app/`: server-rendered homepage, statically generated project routes, metadata and SEO endpoints.
-- `lib/portfolio.ts`: central content and nullable URL configuration.
-- `components/ui.tsx`: reusable project illustrations, cards, tags, and headings.
-- `components/interactions.tsx`: mobile navigation, clipboard feedback, progressive reveal animation.
-- `app/globals.css`: responsive design system and reduced-motion rules.
+This is a Next.js project that can be imported into Vercel from a Git repository. Keep the detected Next.js preset and default build settings. Set `NEXT_PUBLIC_SITE_URL` to the verified production origin, without a trailing slash, then check the project pages, resume download, `/sitemap.xml`, and `/robots.txt`.
 
-No stock photography, fabricated metrics, fake demos, or fake product screenshots are used. A system font stack avoids remote font requests. Reveal animations enhance already-visible server-rendered content.
-
-## Verification
-
-Lint, TypeScript, and production build passed. Desktop and 390px/320px mobile layouts were inspected in Chrome; no horizontal overflow was found. Mobile navigation, Escape to close the menu, project navigation, and copy-email feedback were verified. All public routes returned 200, unknown projects returned 404, and the served resume matched the original PDF byte for byte.
-
-`npm audit --omit=dev` reported zero production vulnerabilities. The full audit reported five high advisories in the development-only Next.js ESLint dependency chain (braces / micromatch / fast-glob). The registry offered no patched braces release at verification time; the suggested automatic fix downgrades the Next.js lint configuration and was not applied. Recheck tooling advisories when updating dependencies.
-
-## Real project screenshots
-
-BakeFlow captures live in `public/images/bakeflow/`. For future projects, place real application captures in `public/screenshots/`, then populate that project's `screenshots` array in `lib/portfolio.ts`. Each entry requires `src` (starting with `/images/` or `/screenshots/`), descriptive `alt`, `caption`, and the original pixel `width` and `height`. Use filenames and captions that describe the real captured view; never populate this array with abstract artwork or fabricated application screens.
-
-The first screenshot becomes the project-card cover and the featured image in the detail gallery. Additional screenshots use a responsive two-column grid that stacks on mobile. Images preserve their aspect ratios, use Next.js image optimization, and link to the original in a new tab for full-size viewing. Empty arrays retain the existing abstract illustrations. Provide source-backed project notes to populate challenges and lessons learned.
-
-Refinement verification covers higher text contrast, 320px/390px/tablet/desktop layout checks, screenshot rendering branches, unchanged project routes and resume downloads, and lint/TypeScript/build checks.
-
-Run the focused screenshot rendering checks with `npx tsx scripts/verify-project-media.tsx`. The test uses rendering-only fixture URLs and does not publish fabricated screenshot files.
+For local metadata checks, copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL`. Without a site URL, the sitemap intentionally returns no URLs. No backend service or secret is required for this portfolio.
